@@ -1,13 +1,6 @@
-SOCIAL LIFE v0.4 — PIXEL-ART VISUAL REVISION
+SOCIAL LIFE v0.5 — 16-BIT ART DIRECTION
 
-This version replaces the deliberately primitive v0.3/Atari-like rendering with a richer handcrafted pixel-art presentation inspired by the visual grammar of 1990s console RPGs: small detailed sprites, layered roofs, textured grass, trees, environmental props, stronger silhouettes, and pixel portraits. It does not copy game assets.
+This revision keeps the v0.4 gameplay and save key but replaces the Atari-like rendering with larger 24px world tiles, 20x27 character sprites, richer environmental detail, and 48x48 dialogue portraits.
 
-GITHUB PAGES UPDATE
-1. Open your social-life-rpg repository.
-2. Replace index.html, style.css, and game.js with the files in this folder.
-3. Commit the changes to main.
-4. GitHub Pages will redeploy automatically at the SAME public URL.
-5. Hard-refresh the live page (Ctrl+Shift+R) if the old art is cached.
-
-SAVE DATA
-v0.4 intentionally uses the same localStorage key as v0.3, so an existing test save should continue to work.
+UPLOAD TO GITHUB
+Replace index.html, style.css, and game.js in the existing social-life-rpg repository. Commit to main. GitHub Pages will redeploy automatically. Then hard-refresh the live page with Ctrl+Shift+R.
