@@ -11,3 +11,10 @@
 /* v4: real sprite-sheet avatar */
 #player{width:64px;height:80px;transform:translate(-50%,-100%);z-index:8;filter:drop-shadow(0 3px 1px rgba(0,0,0,.3))}
 #avatarCanvas{width:64px;height:80px;display:block;image-rendering:pixelated}
+/* v5: true entity sprites + y-sorted character layer */
+#entities{position:absolute;inset:0;pointer-events:none}
+.entity{position:absolute;width:64px;height:88px;transform:translate(-50%,-100%);image-rendering:pixelated;filter:drop-shadow(0 3px 1px rgba(0,0,0,.28));}
+.entity canvas{width:64px;height:88px;display:block;image-rendering:pixelated}
+#player.entity{width:64px;height:88px;transform:translate(-50%,-100%);pointer-events:none}
+.npc{padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto}
+.npc:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:50%}
