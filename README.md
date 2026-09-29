@@ -1,15 +1,21 @@
-# Social Life: Queen City — Avatar + Collision v2
+# Queen City Sprite + Collision Mask v4
 
-Upload the contents of this folder to the root of the existing GitHub Pages repository.
+This build replaces the procedural block avatar with a real pixel-art sprite sheet and replaces shape-based collision with a raster collision mask aligned to the Queen City world image.
 
-## What's new
-- Detailed pixel-art playable avatar (not the Professor Burns portrait)
-- Character menu changes the avatar's skin tone, hair style, hair color, and shirt color
-- Four-direction facing and multi-frame walking animation
-- Click/tap-to-walk with A* pathfinding
-- Collision/navigation mask prevents walking through the cafe, river, fountain, planters, bus/road edge, and other major scenery
-- WASD/arrow controls still work as an optional desktop fallback
-- Existing Queen City art and Professor Burns dialogue preserved
+## Test first
+1. Walk the student around the fountain. The feet should not cross the fountain/flower/railing footprint.
+2. Click inside Riverbend Coffee, the river, fence, planters, café tables, bus, or upper buildings. The pathfinder should stop at/reroute to nearby walkable pavement.
+3. Walk toward baked-in NPCs. They are dynamic collision obstacles.
+4. Press Shift+D (or Character > Show collision debug overlay) to inspect the hidden navigation mask. Green = walkable; red = blocked.
 
-## Important
-Keep the `assets` folder beside index.html. If your GitHub web uploader will not accept folders, create an `assets` folder in the repository first and upload the two PNGs into it.
+## Files
+- index.html
+- style.css
+- game.js
+- data.js
+- assets/queen-city-world.png
+- assets/professor-burns.png
+- assets/player-sprites.png
+- assets/collision-mask.png
+
+Upload the complete contents to the repository root, preserving the assets folder.

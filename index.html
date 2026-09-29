@@ -1,11 +1,11 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Social Life: Queen City</title><link rel="stylesheet" href="style.css"></head><body>
 <div id="game">
 <header><div class="brand">SOCIAL LIFE<span>A SOCIOLOGY RPG</span></div><div class="chapter"><b>Chapter 1: Seeing Society</b><span>Foundations · Perspectives · Research Methods</span></div><div class="place"><b>QUEEN CITY</b><span>A city of neighborhoods</span></div><div class="day"><b>Day 1</b><span>☀ Morning</span></div></header>
-<main id="viewport" aria-label="Queen City game world"><div id="world"><img src="assets/queen-city-world.png" alt="Pixel-art Queen City riverfront district" draggable="false"><div id="player" aria-label="Player character"><canvas id="avatarCanvas" width="36" height="52"></canvas></div><button class="hotspot burns" data-action="burns" aria-label="Talk to Professor Burns"></button><button class="hotspot coffee" data-action="coffee" aria-label="Enter Riverbend Coffee"></button><div id="marker"></div></div>
+<main id="viewport" aria-label="Queen City game world"><div id="world"><img src="assets/queen-city-world.png" alt="Pixel-art Queen City riverfront district" draggable="false"><div id="player" aria-label="Player character"><canvas id="avatarCanvas" width="64" height="80"></canvas></div><button class="hotspot burns" data-action="burns" aria-label="Talk to Professor Burns"></button><button class="hotspot coffee" data-action="coffee" aria-label="Enter Riverbend Coffee"></button><div id="marker"></div></div>
 <nav><button data-menu="home">⌂<span>Home</span></button><button data-menu="map">◆<span>Map</span></button><button data-menu="journal">▣<span>Journal</span></button><button data-menu="people">♟<span>People</span></button><button data-menu="concepts">●<span>Concepts</span></button><button data-menu="character">★<span>Character</span></button></nav>
 <aside id="quest"><small>CURRENT QUEST</small><b>Meet Professor Burns</b><span>Find Professor Burns near the riverfront plaza.</span></aside>
 </main>
 <section id="dialogue" class="hidden"><img src="assets/professor-burns.png" alt="Pixel portrait of Professor Burns"><div class="speech"><b id="speaker">Professor Burns</b><p id="line"></p></div><div id="choices"></div><button id="closeDialog" aria-label="Close dialogue">×</button></section>
 <div id="panel" class="hidden"><button id="closePanel">×</button><h2 id="panelTitle"></h2><div id="panelBody"></div></div>
-<div id="mobileHint">Tap anywhere to walk • Tap people or places to interact</div>
+<div id="mobileHint">Tap to walk • Tap people or places to interact</div>
 </div><script src="data.js"></script><script src="game.js"></script></body></html>

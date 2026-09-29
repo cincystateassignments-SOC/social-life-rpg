@@ -3,3 +3,11 @@
 @media(prefers-reduced-motion:reduce){.walking .head,.walking .legs,#marker{animation:none}}
 /* v2: detailed customizable player sprite */
 #player{width:36px;height:52px;filter:drop-shadow(0 2px 1px rgba(0,0,0,.25))}#avatarCanvas{width:36px;height:52px;display:block;image-rendering:pixelated}.head,.body,.legs{display:none!important}#panelBody label{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:12px 0;padding-bottom:9px;border-bottom:1px solid #367660}#panelBody select{min-width:150px;background:#082a24;color:var(--cream);border:1px solid var(--line);padding:8px;font:inherit}.panelAction{margin-top:10px;background:#176c56;color:var(--cream);border:1px solid var(--gold);padding:10px 14px;cursor:pointer}
+/* v3: full-size player + foot-anchored collision */
+#player{width:48px;height:72px;transform:translate(-50%,-100%);z-index:8;filter:drop-shadow(0 3px 1px rgba(0,0,0,.3))}
+#avatarCanvas{width:48px;height:72px;display:block;image-rendering:pixelated}
+#debugCanvas{position:absolute;inset:0;width:1345px;height:620px;z-index:18;pointer-events:none;image-rendering:pixelated;display:none}
+.hotspot{z-index:9}
+/* v4: real sprite-sheet avatar */
+#player{width:64px;height:80px;transform:translate(-50%,-100%);z-index:8;filter:drop-shadow(0 3px 1px rgba(0,0,0,.3))}
+#avatarCanvas{width:64px;height:80px;display:block;image-rendering:pixelated}
