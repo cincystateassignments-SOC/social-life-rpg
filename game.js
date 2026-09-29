@@ -40,7 +40,30 @@ function closeDialogue(){dlg=null;document.getElementById('dialogue').classList.
 function portrait(who){let o=npcs.find(n=>n.name===who)||{shirt:'#315e82',hair:'#38291f',skin:'#d7a07a',id:'burns'};PX.clearRect(0,0,64,64);rr(PX,0,0,64,64,'#1a4052');rr(PX,0,48,64,16,'#245f4a'); // deliberately low-res portrait, built from large pixel clusters
 rr(PX,17,6,30,7,o.hair);rr(PX,12,12,39,13,o.hair);rr(PX,17,14,30,29,o.skin);rr(PX,12,18,6,17,o.skin);rr(PX,47,18,6,17,o.skin);rr(PX,14,10,12,14,o.hair);rr(PX,38,9,11,12,o.hair);rr(PX,22,23,5,4,'#28221e');rr(PX,38,23,5,4,'#28221e');rr(PX,23,22,2,1,'#f2d0a8');rr(PX,39,22,2,1,'#f2d0a8');rr(PX,29,35,9,3,'#9d6155');rr(PX,17,43,31,21,o.shirt);if(o.id==='burns'){rr(PX,21,44,4,20,'#d8d3ba');rr(PX,38,44,4,20,'#d8d3ba');rr(PX,17,52,31,3,'#173b4f');rr(PX,14,9,18,4,'#4b352a')}}
 function interact(){if(dlg){if(!dlg.choices.length)closeDialogue();return}let o=nearby();if(!o)return;if(o.id==='burns')burns();else if(o.id==='maya')maya();else if(o.id==='lee')lee();else if(o.id==='jordan')jordan();else if(o.id==='raven'){meet('raven');say('Raven','I’m heading to rehearsal later. Queen City is small enough that you keep seeing the same people in completely different roles.');}else if(o.id==='notice')notice();else if(o.id==='bus')bus()}
-function burns(){meet('burns');if(S.quest===0)say('Professor Burns',`Good morning, ${S.char.name}. Start with something ordinary. Riverbend Coffee changed its hours and work schedules this week. Talk to the people affected before you decide what the change means.`,[['I’ll listen before I explain.',()=>{S.quest=1;save();closeDialogue();renderQuest()}],['Why not start with a theory?',()=>say('Professor Burns','Because a theory is useful after you understand what you are trying to explain. Gather some accounts first.',[['Okay. I’ll investigate.',()=>{S.quest=1;save();closeDialogue();renderQuest()}]])]]);else if(S.quest===3)say('Professor Burns','You have three accounts of the same change. What should we ask next?',[['What larger conditions make it easier for some people than others?',()=>{unlock('imagination');S.quest=4;save();say('Professor Burns','Exactly. Personal experiences connect to transportation, work authority, school schedules, and resources. Check the bus stop next.');renderQuest()}],['Which person has the best attitude?',()=>say('Professor Burns','Attitude may matter, but it cannot explain why people face different constraints. Try zooming out.')}]);else if(S.quest===5)say('Professor Burns','Now choose a lens. Each one highlights a different part of what you observed.',[['Who controls schedules and who bears the costs?',()=>finish('conflict','Conflict theory directs attention to power and unequal control over resources.')],['What functions and dysfunctions does the schedule create?',()=>finish('functionalism','Functionalism asks how arrangements coordinate social life—and when they become dysfunctional.')],['How do people define a “reliable worker” or “good customer”?',()=>finish('interaction','Symbolic interactionism examines meanings and labels produced in everyday interaction.')]]);else say('Professor Burns','Keep exploring. Sociology gets interesting when the first explanation is not the last one.')}
+function burns(){
+  meet('burns');
+  if(S.quest===0){
+    say('Professor Burns',`Good morning, ${S.char.name}. Start with something ordinary. Riverbend Coffee changed its hours and work schedules this week. Talk to the people affected before you decide what the change means.`,[
+      ['I’ll listen before I explain.',()=>{S.quest=1;save();closeDialogue();renderQuest()}],
+      ['Why not start with a theory?',()=>say('Professor Burns','Because a theory is useful after you understand what you are trying to explain. Gather some accounts first.',[
+        ['Okay. I’ll investigate.',()=>{S.quest=1;save();closeDialogue();renderQuest()}]
+      ])]
+    ]);
+  } else if(S.quest===3){
+    say('Professor Burns','You have three accounts of the same change. What should we ask next?',[ 
+      ['What larger conditions make it easier for some people than others?',()=>{unlock('imagination');S.quest=4;save();say('Professor Burns','Exactly. Personal experiences connect to transportation, work authority, school schedules, and resources. Check the bus stop next.');renderQuest()}],
+      ['Which person has the best attitude?',()=>say('Professor Burns','Attitude may matter, but it cannot explain why people face different constraints. Try zooming out.')]
+    ]);
+  } else if(S.quest===5){
+    say('Professor Burns','Now choose a lens. Each one highlights a different part of what you observed.',[
+      ['Who controls schedules and who bears the costs?',()=>finish('conflict','Conflict theory directs attention to power and unequal control over resources.')],
+      ['What functions and dysfunctions does the schedule create?',()=>finish('functionalism','Functionalism asks how arrangements coordinate social life—and when they become dysfunctional.')],
+      ['How do people define a “reliable worker” or “good customer”?',()=>finish('interaction','Symbolic interactionism examines meanings and labels produced in everyday interaction.')]
+    ]);
+  } else {
+    say('Professor Burns','Keep exploring. Sociology gets interesting when the first explanation is not the last one.');
+  }
+}
 function finish(k,msg){unlock(k);unlock('methods');S.quest=6;save();say('Professor Burns',msg+' You have completed the first Queen City investigation. Your journal now has material you can use later.');renderQuest()}
 function mark(id){meet(id);S.talked[id]=true;if(['maya','lee','jordan'].every(k=>S.talked[k]))S.quest=2;save();renderQuest()}
 function maya(){meet('maya');say('Maya','I work mornings at Riverbend and take classes in the afternoon. The new schedule gives me more hours, but now I miss the bus that gets me to campus on time.',[['Ask about transportation.',()=>{mark('maya');say('Maya','The next bus is forty minutes later. A car would solve it, but I don’t have one.')}],['Thank her.',()=>{mark('maya');closeDialogue()}]])}
