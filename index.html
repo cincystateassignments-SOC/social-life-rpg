@@ -1,29 +1,11 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#062d25"><title>Social Life — A Sociology RPG</title><link rel="stylesheet" href="style.css"></head>
-<body>
-<div id="shell">
-  <header class="topbar">
-    <div class="brand"><strong>SOCIAL LIFE</strong><span>A SOCIOLOGY RPG</span></div>
-    <div class="chapter"><b>Chapter 1: Seeing Society</b><span>Foundations · Perspectives · Research Methods</span></div>
-    <div class="place"><b>QUEEN CITY</b><span>A city of neighborhoods</span></div>
-    <div class="time"><b>Day 1</b><span>☀ Morning</span></div>
-  </header>
-  <div class="stage">
-    <canvas id="game" width="960" height="540" aria-label="Queen City game world"></canvas>
-    <nav class="rail" aria-label="Game menu">
-      <button data-panel="home">⌂<span>Home</span></button><button data-panel="map">◆<span>Map</span></button><button data-panel="journal">▣<span>Journal</span></button><button data-panel="people">♟<span>People</span></button><button data-panel="concepts">●<span>Concepts</span></button><button data-panel="character">★<span>Character</span></button><button data-panel="help">?<span>Help</span></button>
-    </nav>
-    <div class="quest"><small>CURRENT QUEST</small><b id="questTitle">Meet Professor Burns</b><span id="questText">Find Professor Burns near the college.</span></div>
-    <div id="toast" class="toast hidden"></div>
-    <div id="dialogue" class="dialogue hidden">
-      <canvas id="portrait" width="64" height="64"></canvas>
-      <div class="speech"><div class="speaker" id="speaker"></div><p id="speech"></p><div id="choices"></div><small id="continueHint">SPACE / ENTER</small></div>
-    </div>
-    <div class="mobile-controls" aria-label="Touch controls">
-      <div class="dpad"><button data-move="up">▲</button><button data-move="left">◀</button><button data-move="down">▼</button><button data-move="right">▶</button></div>
-      <button id="actionButton" class="action">A</button>
-    </div>
-  </div>
-  <div id="panel" class="panel hidden"><div class="panel-inner"><button id="closePanel" class="close">×</button><div id="panelContent"></div></div></div>
-</div>
-<script src="game.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Social Life: Queen City</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="game">
+<header><div class="brand">SOCIAL LIFE<span>A SOCIOLOGY RPG</span></div><div class="chapter"><b>Chapter 1: Seeing Society</b><span>Foundations · Perspectives · Research Methods</span></div><div class="place"><b>QUEEN CITY</b><span>A city of neighborhoods</span></div><div class="day"><b>Day 1</b><span>☀ Morning</span></div></header>
+<main id="viewport" aria-label="Queen City game world"><div id="world"><img src="assets/queen-city-world.png" alt="Pixel-art Queen City riverfront district" draggable="false"><div id="player" aria-label="Player"><span class="head"></span><span class="body"></span><span class="legs"></span></div><button class="hotspot burns" data-action="burns" aria-label="Talk to Professor Burns"></button><button class="hotspot coffee" data-action="coffee" aria-label="Enter Riverbend Coffee"></button><div id="marker"></div></div>
+<nav><button data-menu="home">⌂<span>Home</span></button><button data-menu="map">◆<span>Map</span></button><button data-menu="journal">▣<span>Journal</span></button><button data-menu="people">♟<span>People</span></button><button data-menu="concepts">●<span>Concepts</span></button></nav>
+<aside id="quest"><small>CURRENT QUEST</small><b>Meet Professor Burns</b><span>Find Professor Burns near the riverfront plaza.</span></aside>
+</main>
+<section id="dialogue" class="hidden"><img src="assets/professor-burns.png" alt="Pixel portrait of Professor Burns"><div class="speech"><b id="speaker">Professor Burns</b><p id="line"></p></div><div id="choices"></div><button id="closeDialog" aria-label="Close dialogue">×</button></section>
+<div id="panel" class="hidden"><button id="closePanel">×</button><h2 id="panelTitle"></h2><div id="panelBody"></div></div>
+<div id="mobileHint">Tap anywhere to walk • Tap people or places to interact</div>
+</div><script src="data.js"></script><script src="game.js"></script></body></html>

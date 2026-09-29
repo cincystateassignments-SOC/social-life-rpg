@@ -1,0 +1,8 @@
+window.QC_DATA={
+ burns:{intro:"Good morning. Before we start naming theories, I want you to look around. Queen City is full of ordinary routines—and those routines can tell us a lot about society.",choices:[
+ {t:"What should I be looking for?",r:"Start small. Who uses this space? Who seems comfortable here? What rules are people following without anyone saying them out loud? Sociology begins when the ordinary becomes something worth explaining."},
+ {t:"Tell me about Riverbend Coffee.",r:"Something changed there this week. Hours shifted, schedules changed, and people don't all agree about what it means. Talk to the people affected before you decide what's going on."},
+ {t:"Why not start with a theory?",r:"Because I don't want the theory doing your observing for you. Notice first. Ask questions. Then we'll see which sociological lens helps explain the pattern."},
+ {t:"I'll explore for now.",close:true}]},
+ panels:{home:"<p><b>Welcome to Queen City.</b> Explore the district, talk to people, and use sociology to make sense of what you encounter.</p>",map:"<p><b>Riverfront District</b> is currently open. Paths toward OTR, Queen City College, and Findlay Market will open in later chapters.</p>",journal:"<p><b>Observation 1:</b> Professor Burns wants you to observe before choosing an explanation.</p><p>Your journal will grow as you investigate Queen City.</p>",people:"<p><b>Professor Burns</b> — Sociology professor. Encourages you to notice patterns before applying concepts.</p><p>Other residents appear here after you meet them.</p>",concepts:"<p><b>Sociological Imagination</b> — locked</p><p><b>Functionalism</b> — locked</p><p><b>Conflict Theory</b> — locked</p><p><b>Symbolic Interactionism</b> — locked</p>"}
+};
