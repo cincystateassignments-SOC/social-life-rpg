@@ -1,25 +1,13 @@
-SOCIAL LIFE v0.3 — IMPLEMENTATION GUIDE
+SOCIAL LIFE v0.4 — PIXEL-ART VISUAL REVISION
 
-QUICK TEST
-1. Unzip the folder.
-2. Open index.html in Chrome, Edge, Firefox, or Safari.
-3. Use WASD/arrow keys to move and Space/Enter to interact.
+This version replaces the deliberately primitive v0.3/Atari-like rendering with a richer handcrafted pixel-art presentation inspired by the visual grammar of 1990s console RPGs: small detailed sprites, layered roofs, textured grass, trees, environmental props, stronger silhouettes, and pixel portraits. It does not copy game assets.
 
-GITHUB PAGES (recommended for students)
-1. Create a new GitHub repository (for example: social-life-rpg).
-2. Upload index.html, style.css, and game.js to the repository root.
-3. In the repository, open Settings > Pages.
-4. Under Build and deployment, choose Deploy from a branch.
-5. Select the main branch and / (root), then Save.
-6. GitHub will provide a public HTTPS address. Put that link in your LMS.
+GITHUB PAGES UPDATE
+1. Open your social-life-rpg repository.
+2. Replace index.html, style.css, and game.js with the files in this folder.
+3. Commit the changes to main.
+4. GitHub Pages will redeploy automatically at the SAME public URL.
+5. Hard-refresh the live page (Ctrl+Shift+R) if the old art is cached.
 
-IMPORTANT
-- The game is static HTML/CSS/JavaScript. No server, database, npm, or build process is required.
-- Student progress is saved in that browser with localStorage. It does not currently sync across devices or report grades to an LMS.
-- To publish an update, replace the three files in the repository. Existing browser saves remain unless the save-data format changes.
-- For a graded version later, add an end-of-chapter completion code, downloadable completion record, or LMS/LTI integration. v0.3 is intentionally a learning-game prototype rather than a grade-reporting system.
-
-FILES
-index.html — page/UI structure
-style.css — 8-bit visual presentation and responsive layout
-game.js — map, movement, dialogue, quests, sociology concepts, saving
+SAVE DATA
+v0.4 intentionally uses the same localStorage key as v0.3, so an existing test save should continue to work.
