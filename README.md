@@ -1,11 +1,15 @@
-# Social Life — Queen City Vertical Slice
-GitHub Pages-ready browser prototype.
+# Social Life: Queen City — Avatar + Collision v2
 
-## Controls
-- Desktop: click a walkable location to move; click Professor Burns or Riverbend Coffee to interact. Arrow keys/WASD are optional.
-- Mobile/tablet: tap to move and tap interactive people/places.
+Upload the contents of this folder to the root of the existing GitHub Pages repository.
 
-## Deploy
-Upload all files and folders to the root of the existing GitHub Pages repository, preserving the `assets/` folder. Replace older files, commit, wait for Pages to deploy, then hard-refresh.
+## What's new
+- Detailed pixel-art playable avatar (not the Professor Burns portrait)
+- Character menu changes the avatar's skin tone, hair style, hair color, and shirt color
+- Four-direction facing and multi-frame walking animation
+- Click/tap-to-walk with A* pathfinding
+- Collision/navigation mask prevents walking through the cafe, river, fountain, planters, bus/road edge, and other major scenery
+- WASD/arrow controls still work as an optional desktop fallback
+- Existing Queen City art and Professor Burns dialogue preserved
 
-This is a vertical slice: one district and a short interaction are intentionally implemented before expanding the full sociology content.
+## Important
+Keep the `assets` folder beside index.html. If your GitHub web uploader will not accept folders, create an `assets` folder in the repository first and upload the two PNGs into it.
