@@ -1,0 +1,24 @@
+const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
+const W=960,H=640,FW=48,FH=64,dirs={down:0,left:1,right:2,up:3};
+const load=s=>new Promise((res,rej)=>{let i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=s});
+const [world,playerSheet,burnsSheet]=await Promise.all([load('assets/tiles/riverbend-world.png'),load('assets/sprites/player.png'),load('assets/sprites/burns.png')]);
+// World collision is defined from map objects, not guessed from a flattened illustration.
+const solids=[
+ {x:245,y:25,w:470,h:220,t:'building'}, {x:0,y:525,w:960,h:115,t:'river/fence'},
+ {x:690,y:350,w:180,h:185,t:'fountain'},
+ {x:45,y:265,w:90,h:105,t:'tree'}, {x:85,y:385,w:90,h:105,t:'tree'}, {x:715,y:235,w:90,h:100,t:'tree'}, {x:575,y:265,w:90,h:100,t:'tree'},
+ {x:555,y:470,w:110,h:50,t:'bench'}, {x:65,y:490,w:110,h:50,t:'bench'}
+];
+const burns={x:580,y:330,dir:'down',frame:0,w:26,h:18};
+const player={x:455,y:430,dir:'up',frame:0,target:null,speed:145,w:24,h:16,walkT:0};
+let debug=false,last=performance.now();
+function blocked(x,y,who=player){const box={x:x-who.w/2,y:y-who.h/2,w:who.w,h:who.h};for(const s of solids)if(box.x<s.x+s.w&&box.x+box.w>s.x&&box.y<s.y+s.h&&box.y+box.h>s.y)return true;if(who===player){const b={x:burns.x-burns.w/2,y:burns.y-burns.h/2,w:burns.w,h:burns.h};if(box.x<b.x+b.w&&box.x+box.w>b.x&&box.y<b.y+b.h&&box.y+box.h>b.y)return true}return false}
+// Grid A* for click-to-move. Nodes are foot positions; scenery/NPCs block occupancy.
+const GS=16;function key(x,y){return x+','+y}function nearestOpen(x,y){let gx=Math.round(x/GS)*GS,gy=Math.round(y/GS)*GS;if(!blocked(gx,gy))return[gx,gy];for(let r=1;r<12;r++)for(let yy=-r;yy<=r;yy++)for(let xx=-r;xx<=r;xx++){let nx=gx+xx*GS,ny=gy+yy*GS;if(nx>10&&nx<W-10&&ny>250&&ny<H-80&&!blocked(nx,ny))return[nx,ny]}return null}
+function pathfind(sx,sy,tx,ty){const S=nearestOpen(sx,sy),T=nearestOpen(tx,ty);if(!S||!T)return[];let open=[S],came=new Map(),g=new Map([[key(...S),0]]),f=new Map([[key(...S),Math.hypot(S[0]-T[0],S[1]-T[1])]]);while(open.length){open.sort((a,b)=>(f.get(key(...a))??1e9)-(f.get(key(...b))??1e9));let c=open.shift();if(c[0]===T[0]&&c[1]===T[1]){let p=[c],k=key(...c);while(came.has(k)){c=came.get(k);p.push(c);k=key(...c)}return p.reverse().slice(1)}for(const [dx,dy] of [[GS,0],[-GS,0],[0,GS],[0,-GS]]){let n=[c[0]+dx,c[1]+dy];if(n[0]<10||n[0]>W-10||n[1]<250||n[1]>H-75||blocked(...n))continue;let nk=key(...n),ng=(g.get(key(...c))??1e9)+GS;if(ng<(g.get(nk)??1e9)){came.set(nk,c);g.set(nk,ng);f.set(nk,ng+Math.hypot(n[0]-T[0],n[1]-T[1]));if(!open.some(q=>q[0]===n[0]&&q[1]===n[1]))open.push(n)}}}return[]}
+let route=[];canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;if(Math.hypot(x-burns.x,y-(burns.y-28))<45){let spots=[[burns.x,burns.y+45],[burns.x-45,burns.y],[burns.x+45,burns.y],[burns.x,burns.y-45]].filter(p=>!blocked(...p));spots.sort((a,b)=>Math.hypot(a[0]-player.x,a[1]-player.y)-Math.hypot(b[0]-player.x,b[1]-player.y));route=pathfind(player.x,player.y,...spots[0]);player.talkAfter=true}else{route=pathfind(player.x,player.y,x,y);player.talkAfter=false}});
+addEventListener('keydown',e=>{if(e.key.toLowerCase()==='d')debug=!debug});document.querySelector('#closeDialog').onclick=()=>document.querySelector('#dialog').classList.add('hidden');
+function sprite(img,e){let row=dirs[e.dir],col=e.frame%4;ctx.drawImage(img,col*FW,row*FH,FW,FH,Math.round(e.x-FW/2),Math.round(e.y-FH+8),FW,FH)}
+function update(dt){if(!route.length){player.frame=0;return}let [tx,ty]=route[0],dx=tx-player.x,dy=ty-player.y,dist=Math.hypot(dx,dy);if(dist<3){player.x=tx;player.y=ty;route.shift();if(!route.length&&player.talkAfter){document.querySelector('#dialog').classList.remove('hidden');player.talkAfter=false}return}let step=Math.min(dist,player.speed*dt),nx=player.x+dx/dist*step,ny=player.y+dy/dist*step;if(blocked(nx,ny)){route=[];return}player.x=nx;player.y=ny;if(Math.abs(dx)>Math.abs(dy))player.dir=dx<0?'left':'right';else player.dir=dy<0?'up':'down';player.walkT+=dt;player.frame=1+Math.floor(player.walkT*8)%3}
+function render(){ctx.clearRect(0,0,W,H);ctx.drawImage(world,0,0);if(debug){ctx.globalAlpha=.42;ctx.fillStyle='#e33';for(const s of solids)ctx.fillRect(s.x,s.y,s.w,s.h);ctx.fillStyle='#28a8ff';ctx.fillRect(burns.x-burns.w/2,burns.y-burns.h/2,burns.w,burns.h);ctx.globalAlpha=1}let ents=[{...burns,img:burnsSheet},{...player,img:playerSheet}].sort((a,b)=>a.y-b.y);for(const e of ents)sprite(e.img,e);ctx.fillStyle='#f1d65f';ctx.font='bold 24px monospace';ctx.textAlign='center';ctx.fillText('!',burns.x,burns.y-FH-2);ctx.textAlign='left'}
+function loop(t){let dt=Math.min(.04,(t-last)/1000);last=t;update(dt);render();requestAnimationFrame(loop)}requestAnimationFrame(loop);

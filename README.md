@@ -1,17 +1,22 @@
-# Social Life: Queen City — Entity Sprites v5
+# Social Life — Queen City Fresh Build v1
 
-This build replaces the standing plaza characters with independent sprite entities and fixes the player's clipped head by adding transparent headroom to every animation frame.
+This is a clean restart, not a continuation of the earlier prototype code.
 
-## What changed
-- Player sprite: 64×88 frames with 8 px transparent headroom; no flat/cropped hairline.
-- Professor Burns and four standing plaza residents are independent sprite entities.
-- Y-sorting uses each character's foot position: walk above someone and they render in front; walk below them and the player renders in front.
-- NPCs dynamically block movement, so the player cannot occupy the same standing space.
-- Clicking an NPC routes the player to a valid adjacent position rather than onto the NPC.
-- Static scenery still uses the collision mask.
-- Shift+D toggles the collision debug overlay.
+## Design rules
+- Characters are native transparent sprite sheets (48x64 frames), not cropped from composite images.
+- Full headroom is built into every frame; no flat/clipped heads.
+- Collision is map/object data from the beginning.
+- Collision is based on feet footprints.
+- Professor Burns is a separate sprite/entity and blocks the player.
+- Click/tap uses A* pathfinding to reachable foot positions.
+- Press D for collision debug.
+- Static world art contains no interactive characters.
 
-## Important development note
-The seated café patrons and bench reader remain part of the environmental art in this pass; they are treated as static scenery/collision. The mobile/standing cast is now entity-based, which establishes the reusable architecture for schedules, moving NPCs, recurring characters, and later scenarios.
+## Test first
+1. Click around Riverbend.
+2. Try to click inside the building, fountain, trees, benches, fence/river.
+3. Try to walk through Professor Burns.
+4. Click Professor Burns; the player should route adjacent and open dialogue.
+5. Press D to inspect collision zones.
 
-Upload the contents of this folder to the root of the GitHub Pages repository, preserving the `assets/` folder.
+The environment art is intentionally simple in this engineering build. The goal is to validate movement, sprites, collision, depth/entity architecture before investing in final tile art.
